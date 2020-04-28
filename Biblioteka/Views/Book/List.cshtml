@@ -1,0 +1,15 @@
+﻿@model BooksListViewModel
+
+<h1>@Model.HeaderOfThePage</h1>
+<br />
+@foreach (var book in Model.Books)
+{
+    <div>
+        <h3>@book.title</h3>
+        <h4>@book.author</h4>
+        <h4>@book.ISBN</h4>
+        <h4>@book.lastRentalDate</h4>
+        <h4>@book.borrowerName</h4>
+        <br />
+    </div>
+}
