@@ -33,5 +33,14 @@ namespace Biblioteka.Controllers
         //{
         //    return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         //}
+
+        [Route("AddNew")]
+        [HttpGet]
+        public IActionResult AddNew()
+        {
+            //var model = new Book();
+            //return View(model);
+            return View();
+        }
     }
 }

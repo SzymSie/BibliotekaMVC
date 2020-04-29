@@ -7,10 +7,10 @@ namespace Biblioteka.Models
 {
     public class Book
     {
-        public string title { get; set; }
-        public string author { get; set; }
+        public string Title { get; set; }
+        public string Author { get; set; }
         public int ISBN { get; set; }
-        public string lastRentalDate { get; set; }
-        public string borrowerName { get; set; }
+        public string LastRentalDate { get; set; }
+        public string BorrowerName { get; set; }
     }
 }

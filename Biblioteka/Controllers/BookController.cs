@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Biblioteka.Controllers
 {
+    [Route("book/list")]
+    [ApiController]
     public class BookController : Controller
     {
         private readonly IBookRepository _bookRepository;
@@ -24,9 +26,18 @@ namespace Biblioteka.Controllers
             //ViewBag.HeaderOfThePage = "Library";
             //return View(_bookRepository.AllBooks);
             BooksListViewModel booksListViewModel = new BooksListViewModel();
-            booksListViewModel.Books = _bookRepository.AllBooks;
+            booksListViewModel.Books = _bookRepository.AllBooks();
             booksListViewModel.HeaderOfThePage = "Library";
             return View(booksListViewModel);
+        }
+
+        [HttpPost]
+        public IActionResult AddBook([FromForm]Book book)
+        {
+            Console.WriteLine(book.Author);
+            Console.WriteLine(book.ISBN);
+            _bookRepository.Add(book);
+            return Redirect("/book/list");
         }
     }
 }

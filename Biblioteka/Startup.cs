@@ -26,6 +26,8 @@ namespace Biblioteka
         {
             services.AddScoped<IBookRepository, JsonBookRepository>();
             services.AddControllersWithViews();
+            services.AddControllers();
+            services.AddRazorPages();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,9 +52,17 @@ namespace Biblioteka
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                
+                //endpoints.MapControllerRoute("book", "book/list", new
+                //{
+                //    controller = "Book",
+                //    action = "Post"
+                //});
             });
         }
     }

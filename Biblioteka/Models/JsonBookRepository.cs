@@ -9,19 +9,30 @@ namespace Biblioteka.Models
 {
     public class JsonBookRepository : IBookRepository
     {
-        string jsonPath = @".\books.json";
+        private string jsonPath = @".\books.json";
 
         //public IEnumerable<Book> AllBooks =>
-        public List<Book> AllBooks =>
-            JsonSerializer.Deserialize<List<Book>>(File.ReadAllText(jsonPath));
-
-        public Book GetBookByISBN(int ISBN)
+        public IEnumerable<Book> AllBooks()
         {
-            return AllBooks.FirstOrDefault(book => book.ISBN == ISBN);
+            using (var jsonFileReader = File.OpenText(jsonPath))
+            {
+                return JsonSerializer.Deserialize<Book[]>(jsonFileReader.ReadToEnd(),
+                    new JsonSerializerOptions
+                    {
+                        PropertyNameCaseInsensitive = true
+                    });
+            }
         }
+
+        //public Book GetBookByISBN(int ISBN)
+        //{
+        //    return AllBooks.FirstOrDefault(book => book.ISBN == ISBN);
+        //}
         public Book Add(Book newBook)
         {
-            AllBooks.Add(newBook);
+            List<Book> books = AllBooks().ToList();
+            books.Add(newBook);
+            File.WriteAllText(jsonPath, JsonSerializer.Serialize(books));
             return newBook;
         }
     }
