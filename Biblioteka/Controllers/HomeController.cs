@@ -6,16 +6,20 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Biblioteka.Models;
+using Biblioteka.ViewModels;
 
 namespace Biblioteka.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IBookRepository _bookRepository;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,
+            IBookRepository bookRepository)
         {
             _logger = logger;
+            _bookRepository = bookRepository;
         }
 
         public IActionResult Index()
@@ -28,6 +32,14 @@ namespace Biblioteka.Controllers
             return View();
         }
 
+        public IActionResult List()
+        {
+            BooksListViewModel booksListViewModel = new BooksListViewModel();
+            booksListViewModel.Books = _bookRepository.AllBooks();
+            booksListViewModel.HeaderOfThePage = "Library";
+            return View(booksListViewModel);
+        }
+
         //[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         //public IActionResult Error()
         //{
@@ -38,8 +50,6 @@ namespace Biblioteka.Controllers
         [HttpGet]
         public IActionResult AddNew()
         {
-            //var model = new Book();
-            //return View(model);
             return View();
         }
     }

@@ -23,11 +23,6 @@ namespace Biblioteka.Models
                     });
             }
         }
-
-        //public Book GetBookByISBN(int ISBN)
-        //{
-        //    return AllBooks.FirstOrDefault(book => book.ISBN == ISBN);
-        //}
         public Book Add(Book newBook)
         {
             List<Book> books = AllBooks().ToList();

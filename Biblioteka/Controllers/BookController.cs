@@ -21,23 +21,17 @@ namespace Biblioteka.Controllers
             _bookRepository = bookRepository;
         }
 
-        public ViewResult List()
+        [HttpGet]
+        public IEnumerable<Book> GetAllBooks()
         {
-            //ViewBag.HeaderOfThePage = "Library";
-            //return View(_bookRepository.AllBooks);
-            BooksListViewModel booksListViewModel = new BooksListViewModel();
-            booksListViewModel.Books = _bookRepository.AllBooks();
-            booksListViewModel.HeaderOfThePage = "Library";
-            return View(booksListViewModel);
+            return _bookRepository.AllBooks();
         }
 
         [HttpPost]
-        public IActionResult AddBook([FromForm]Book book)
+        public ActionResult AddBook([FromForm]Book book)
         {
-            Console.WriteLine(book.Author);
-            Console.WriteLine(book.ISBN);
             _bookRepository.Add(book);
-            return Redirect("/book/list");
+            return Redirect("/home/list");
         }
     }
 }
