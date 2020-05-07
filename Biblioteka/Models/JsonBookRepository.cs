@@ -11,8 +11,9 @@ namespace Biblioteka.Models
     {
         private string jsonPath = @".\books.json";
 
+
         //public IEnumerable<Book> AllBooks =>
-        public IEnumerable<Book> AllBooks()
+        public IEnumerable<Book> GetAllBooks()
         {
             using (var jsonFileReader = File.OpenText(jsonPath))
             {
@@ -23,12 +24,39 @@ namespace Biblioteka.Models
                     });
             }
         }
-        public Book Add(Book newBook)
+
+        public Book GetBookByISBN(int ISBN)
         {
-            List<Book> books = AllBooks().ToList();
-            books.Add(newBook);
-            File.WriteAllText(jsonPath, JsonSerializer.Serialize(books));
-            return newBook;
+            throw new NotImplementedException();
         }
+
+        public void CreateBook(Book book)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SaveChanges()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateBook(Book book)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteBook(Book book)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        //public Book Add(Book newBook)
+        //{
+        //    List<Book> books = AllBooks().ToList();
+        //    books.Add(newBook);
+        //    File.WriteAllText(jsonPath, JsonSerializer.Serialize(books));
+        //    return newBook;
+        //}
     }
 }

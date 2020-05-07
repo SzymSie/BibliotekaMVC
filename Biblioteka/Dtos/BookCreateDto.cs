@@ -4,13 +4,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Biblioteka.Models
+namespace Biblioteka.Dtos
 {
-    public class Book
+    public class BookCreateDto
     {
-        [Key]
-        [Required]
-        public int ISBN { get; set; }
+        //public int ISBN { get; set; }
         [Required]
         [MaxLength(250)]
         public string Title { get; set; }
@@ -18,6 +16,7 @@ namespace Biblioteka.Models
         public string Author { get; set; }
         [Required]
         public string LastRentalDate { get; set; }
+        [Required]
         public string BorrowerName { get; set; }
     }
 }

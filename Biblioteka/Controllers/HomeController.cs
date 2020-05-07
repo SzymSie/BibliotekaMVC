@@ -35,7 +35,7 @@ namespace Biblioteka.Controllers
         public IActionResult List()
         {
             BooksListViewModel booksListViewModel = new BooksListViewModel();
-            booksListViewModel.Books = _bookRepository.AllBooks();
+            booksListViewModel.Books = _bookRepository.GetAllBooks();
             booksListViewModel.HeaderOfThePage = "Library";
             return View(booksListViewModel);
         }

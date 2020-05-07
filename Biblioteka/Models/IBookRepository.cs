@@ -7,7 +7,12 @@ namespace Biblioteka.Models
 {
     public interface IBookRepository
     {
-        IEnumerable<Book> AllBooks();
-        Book Add(Book newBook);
+        bool SaveChanges();
+
+        IEnumerable<Book> GetAllBooks();
+        Book GetBookByISBN(int ISBN);
+        void CreateBook(Book book);
+        void UpdateBook(Book book);
+        void DeleteBook(Book book);
     }
 }
